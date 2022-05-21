@@ -784,76 +784,7 @@
     </div>
 </div>
  <script type="text/javascript" src="./Lịch học, lịch thi theo tuần_files/lang.js.download"></script>
-<script>
 
-    $(document).ready(function () {
-        var ngay = Date.now();
-        LoadLichTheoTuan(ngay);
-    });
-
-    $('input[type=radio][name=rdoLoaiLich]').change(function () {
-        var ngay = $('#firstDateOffWeek').val();
-        LoadLichTheoTuan(ngay);
-    });
-
-    function LoadLichTheoTuan(ngay) {
-        var loaiLich = parseInt($("#rdoLoaiLich:checked").val());
-        loadingLichTheoTuan()
-        $.ajax({
-            url: "/SinhVien/GetDanhSachLichTheoTuan",
-                type: 'POST',
-                dataType: 'html',
-                data: { pNgayHienTai: ngay, pLoaiLich : loaiLich},
-                success: function (data) {
-                    $('#viewLichTheoTuan').html(data);
-                },
-        });
-    }
-
-    $(function ()
-    {
-        $('#dateNgayXemLich').change(function () {
-        var ngay = $('#dateNgayXemLich').data("kendoDatePicker").value();
-        LoadLichTheoTuan(ngay.toJSON());
-        });
-    });
-
-    $('body').on('click', '#btn_TroVe', function () {
-        var ngay = $('#firstDatePrevOffWeek').val();
-        $('#dateNgayXemLich').val(ngay);
-        LoadLichTheoTuan(ngay);
-    })
-
-     $('body').on('click', '#btn_Tiep', function () {
-         var ngay = $('#firstDateNextOffWeek').val();
-         $('#dateNgayXemLich').val(ngay);
-         LoadLichTheoTuan(ngay);
-    })
-
-    $('body').on('click', '#btn_HienTai', function () {
-        var ngay = Date.now();
-        $('#dateNgayXemLich').data("kendoDatePicker").value('21/05/2022');
-        LoadLichTheoTuan(ngay);
-    })
-
-    function loadingLichTheoTuan() {
-        $('#viewLichTheoTuan').html('<div class="iframe-loading-overlay" style="display: block;"><i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="position:absolute;top:50%;left:50%;color:#397FAE;margin-top:20%;margin-left:-45px;font-size:90px;"></i></div>');
-    }
-    function PrintElem() {
-        var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-        mywindow.document.write('<html><head>')
-        mywindow.document.write('<style type="text/css" media="print">* {-webkit-print-color-adjust: exact !important; /*Chrome, Safari */color-adjust: exact !important;  /*Firefox*/}</style>')
-        mywindow.document.write('<link href = "../Content/ThemeMXH/css/style.css?v=300" rel = "stylesheet" type="text/css"/>');
-        mywindow.document.write('</head><body >');
-        mywindow.document.write($("#viewLichTheoTuan").html());
-        mywindow.document.write('</body></html>');
-        mywindow.document.close();
-        mywindow.focus();
-
-        setTimeout(function () { mywindow.print(); mywindow.close(); }, 500);
-        return true;
-    }
-</script>
 
                     </div>
                 </div>
